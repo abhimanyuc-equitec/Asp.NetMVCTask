@@ -1,0 +1,77 @@
+﻿@model StudentManagmentSystem.Models.StudentModel
+
+@{
+    ViewBag.Title = "ViewDeletedData";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Deleted Student Information</h2>
+
+    <div class="card">
+        <div class="card-header">
+            <h4>Deleted Student Details</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.RollNo)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.RollNo)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.DepartmentName)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.DepartmentName)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Age)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Age)
+                    @{
+                        var age = DateTime.Now.Year - Model.DOB.Year;
+                    }
+                    @age
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Gender)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Gender)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Address)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Address)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.PhoneNo)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.PhoneNo)
+                </dd>
+            </dl>
+        </div>
+        <div class="card-footer text-center">
+            <p>
+                @Html.ActionLink("Restore", "RestoreData", new { id = Model.Id }, new { @class = "btn btn-success btn-sm" }) |
+                @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-secondary btn-sm" })
+            </p>
+        </div>
+    </div>
+</div>
