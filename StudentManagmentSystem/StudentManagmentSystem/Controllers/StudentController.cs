@@ -23,10 +23,11 @@ namespace StudentManagmentSystem.Controllers
 
         public ActionResult Index(int page = 1, int pageLenght = 3)
         {
-            ViewBag.CurrentPage = page;
-
+            //SR NO COUNT
             int startingCount = (page - 1) * pageLenght + 1;
             ViewBag.StartingCount = startingCount;
+
+           
             using (var conn = new SqlConnection(connection))
             {
                 conn.Open();
@@ -49,7 +50,7 @@ namespace StudentManagmentSystem.Controllers
         public ActionResult Show(int page = 1, int pageLenght = 3)
         {
             //return View(DB.GetData());
-            ViewBag.CurrentPage = page;
+            
 
             int startingCount = (page - 1) * pageLenght + 1;
             ViewBag.StartingCount = startingCount;
@@ -77,7 +78,7 @@ namespace StudentManagmentSystem.Controllers
         public ActionResult DeletedData(int page = 1, int pageLenght = 3)
         {
            
-            ViewBag.CurrentPage = page;
+           
 
             int startingCount = (page - 1) * pageLenght + 1;
             ViewBag.StartingCount = startingCount;
@@ -159,6 +160,7 @@ namespace StudentManagmentSystem.Controllers
                 string sql = "select * from DepartmentTable";
                 var ex = con.Query<StudentModel>(sql).ToList();
                 ViewBag.dept = ex;
+               
             }
             ViewBag.Id = Id;
             return View();

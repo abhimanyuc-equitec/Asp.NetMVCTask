@@ -60,7 +60,7 @@ namespace StudentManagmentSystem.Repository
             using (SqlConnection con = new SqlConnection(connection))
             {
                 con.Open();
-                string query = "update studentInfo SET Name = @Name, RollNo = @RollNo,Gender = @Gender, Address = @Address, PhoneNo = @PhoneNo ,DeptId = @DeptId WHERE Id = @Id";
+                string query = "update studentInfo SET Name = @Name, RollNo = @RollNo,Gender = @Gender, Address = @Address, PhoneNo = @PhoneNo ,DeptId = @DeptId,DOB =@DOB WHERE Id = @Id";
                 con.Execute(query,std);
             }
         }

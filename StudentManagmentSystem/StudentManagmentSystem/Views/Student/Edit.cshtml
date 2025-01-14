@@ -39,22 +39,22 @@
         <div class="mb-3 row">
             @Html.LabelFor(model => model.DepartmentName, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
             <div class="col-sm-10">
-                @Html.TextBoxFor(model => model.DepartmentName, new { @class = "form-control", id="DeptId" })
+               
                 @Html.DropDownListFor(
                     model => model.DeptId,
                     new SelectList(ViewBag.dept, "DeptId", "DepartmentName"),
                     "Select Department",
-                    new { @class = "form-control" }
+                    new { @class = "form-control" ,id="DeptId"}
                 )
             </div>
         </div>
 
-         Date of Birth 
+         
         <div class="mb-3 row">
             @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
             <div class="col-sm-10">
-                @Html.TextBoxFor(model => model.DOB,  new { @class = "form-control", id = "DOB" })
-                @Html.TextBoxFor(model => model.DOB, new { @class = "form-control",type = "date", id = "DOB" })
+                @Html.TextBoxFor(model => model.DOB,  new { @class = "form-control", id = "DOB" ,type="date" })
+                @*@Html.TextBoxFor(model => model.DOB, new { @class = "form-control",type = "date", id = "DOB" })*@
             </div>
         </div>
 
@@ -159,12 +159,15 @@
                     $('#Address').val(res.Address);
                     $('#Gender').val(res.Gender);
                     $('#PhoneNo').val(res.PhoneNo);
-                  
+                    $('#DeptId').val(res.DeptId);
+                    $('#DepartmentName').val(res.DepartmentName);
+
                     var timestamp = parseInt(res.DOB.replace(/\/Date\((\d+)\)\//, "$1"));
                     var date = new Date(timestamp);
                     var formattedDate = date.toISOString().split('T')[0]; 
                     $('#DOB').val(formattedDate);     
-                    $('#DeptId').val(res.DepartmentName);
+                   
+
                 },
                 error: function (res) {
                     alert("Error: " + res);
