@@ -21,7 +21,7 @@ namespace StudentManagmentSystem.Controllers
         StudentDB DB = new StudentDB();
         string connection = ConfigurationManager.ConnectionStrings["connect"].ConnectionString;
 
-        public ActionResult Index(int page = 1, int pageLenght = 3)
+        public ActionResult Index(int page = 1, int pageLenght = 5)
         {
             //SR NO COUNT
             int startingCount = (page - 1) * pageLenght + 1;
@@ -47,7 +47,7 @@ namespace StudentManagmentSystem.Controllers
                 }
             }
         }
-        public ActionResult Show(int page = 1, int pageLenght = 3)
+        public ActionResult Show(int page = 1, int pageLenght = 5)
         {
             //return View(DB.GetData());
             
@@ -75,10 +75,8 @@ namespace StudentManagmentSystem.Controllers
             }
 
         }
-        public ActionResult DeletedData(int page = 1, int pageLenght = 3)
+        public ActionResult DeletedData(int page = 1, int pageLenght = 5)
         {
-           
-           
 
             int startingCount = (page - 1) * pageLenght + 1;
             ViewBag.StartingCount = startingCount;
@@ -160,7 +158,6 @@ namespace StudentManagmentSystem.Controllers
                 string sql = "select * from DepartmentTable";
                 var ex = con.Query<StudentModel>(sql).ToList();
                 ViewBag.dept = ex;
-               
             }
             ViewBag.Id = Id;
             return View();

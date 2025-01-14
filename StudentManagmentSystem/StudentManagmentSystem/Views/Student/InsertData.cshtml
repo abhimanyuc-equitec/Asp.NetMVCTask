@@ -4,14 +4,14 @@
     ViewBag.Title = "InsertData";
 }
 
-<h2 class="text-center mb-4">Insert Data</h2>
+<h2 class="text-center mb-1 text-bg-info  bg-opacity-10">Student Creation Table </h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="container">
-        <h4 class="mb-3">Student Information</h4>
+        <h4 class="mb-2 mt-1">Student Information</h4>
         <hr />
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
