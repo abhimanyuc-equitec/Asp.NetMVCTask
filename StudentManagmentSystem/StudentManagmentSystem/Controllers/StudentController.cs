@@ -169,6 +169,7 @@ namespace StudentManagmentSystem.Controllers
                 DB.UpdateData(std);
                 TempData["Updated"] = "Data Updated successfully!";
                 return RedirectToAction("Index");
+                
         }
        
         public ActionResult GetById(int Id)

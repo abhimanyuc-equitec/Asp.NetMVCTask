@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<StudentManagmentSystem.Models.StudentModel>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
 @{
     ViewBag.Title = "DeletedData";
@@ -7,92 +10,64 @@
 @{
     int currentCount = ViewBag.StartingCount;
 }
-<h2>DeletedData</h2>
-<div class="d-flex justify-content-lg-end mb-2">
-    <a href="@Url.Action("Show")" class="btn btn-primary mx-1 rounded-pill shadow-sm">Back to Hoome Page</a>
-</div>
-<div>
 
+<h2 class="text-center text-danger mb-4">Deleted Data</h2>
+
+<div class="d-flex justify-content-end mb-4">
+    <a href="@Url.Action("Index")" class="btn btn-warning mx-1 rounded-pill shadow-sm"> Home</a>
+</div>
+
+<div class="table-responsive">
     <table class="table table-bordered table-striped">
-        <tr>
-            <th>
-                @Html.DisplayName("SRNo")
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.RollNo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DepartmentName)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.Age)
-
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Gender)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNo)
-            </th>
-            <th></th>
-        </tr>
-        @*@{
-            int count = 1; // Initialize the count variable
-        }*@
-        @foreach (var item in Model)
-        {
+        <thead class="thead-dark">
             <tr>
-                <td>
-                    @currentCount
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RollNo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DepartmentName)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.Age)
-                    @{
-                        var age = DateTime.Now.Year - item.DOB.Year;
-                    }
-                    @age
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Gender)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PhoneNo)
-                </td>
-                <td>
-                    @Html.ActionLink("Restrore", "RestoreData", new { id = item.Id }) |
-                    @*@Html.ActionLink("Details", "Details", new { id=item.Id  }) |*@
-                    @Html.ActionLink("View", "ViewDataDeleted", new { id = item.Id })
-                </td>
-                @{
-                    currentCount++;  // Increment count after each iteration
-                }
+                <th class="text-center">SR NO</th>
+                <th>@Html.DisplayNameFor(model => model.RollNo)</th>
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th>@Html.DisplayNameFor(model => model.DepartmentName)</th>
+                <th>@Html.DisplayNameFor(model => model.Age)</th>
+                <th>@Html.DisplayNameFor(model => model.Gender)</th>
+                <th>@Html.DisplayNameFor(model => model.Address)</th>
+                <th>@Html.DisplayNameFor(model => model.PhoneNo)</th>
+                <th class="text-center">Actions</th>
             </tr>
-        }
-
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-center">@currentCount</td>
+                    <td>@Html.DisplayFor(modelItem => item.RollNo)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DepartmentName)</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Age)
+                        @{
+                            var age = DateTime.Now.Year - item.DOB.Year;
+                        }
+                        @age
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Gender)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PhoneNo)</td>
+                    <td class="text-center">
+                        <button class="btn btn-info btn-sm" onclick="window.location.href='@Url.Action("ViewDataDeleted", new { Id = item.Id })'">
+                            <i class="fa fa-info-circle" style="font-size:15px;"></i> View
+                        </button>
+                        <button class="btn btn-success btn-sm" onclick="window.location.href='@Url.Action("RestoreData", new { Id = item.Id })'">
+                            <i class="fa fa-undo" style="font-size:15px;"></i> Restore
+                        </button>
+                    </td>
+                    @{
+                        currentCount++;
+                    }
+                </tr>
+               
+            }
+        </tbody>
     </table>
-
 </div>
+
 <div class="d-flex justify-content-lg-end mt-4">
     @if (ViewBag.CurrentPage > 1)
     {
