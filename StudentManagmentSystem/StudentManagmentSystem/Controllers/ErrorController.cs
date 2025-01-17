@@ -7,31 +7,23 @@ using System.Web.Mvc;
 
 namespace StudentManagmentSystem.Controllers
 {
-    public class HomeController : Controller
+    public class ErrorController : Controller
     {
-      
-        StudentRepository DB = new StudentRepository();
+        // GET: Error
+        StudentRepository studentRepository = new StudentRepository();
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult Show()
+        public ActionResult PageNotFound(Exception e)
         {
+            studentRepository.Error(e);
             return View();
         }
-        public ActionResult About()
+        public ActionResult ServerError (Exception e) 
         {
-            ViewBag.Message = "Your application description page.";
-
+            studentRepository.Error(e);
             return View();
         }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
     }
 }

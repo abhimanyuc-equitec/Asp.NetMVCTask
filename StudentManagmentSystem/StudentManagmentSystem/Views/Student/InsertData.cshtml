@@ -3,7 +3,18 @@
 @{
     ViewBag.Title = "InsertData";
 }
-
+@{
+    if (TempData["Success"] != null)
+    {
+        string message = TempData["Success"].ToString();
+        <div class="alert alert-danger">@message</div>
+    }
+    else if(TempData["Error"] != null)
+    {
+        string message = TempData["Error"].ToString();
+        <div class="alert alert-danger">@message</div>
+    }
+}
 <h2 class="text-center mb-1 text-bg-info  bg-opacity-10">Student Creation Table </h2>
 
 @using (Html.BeginForm())
@@ -100,7 +111,7 @@
     </div>
 }
 <div>
-    <a href="@Url.Action("Show")" class="btn btn-secondary mx-1 rounded-pill shadow-sm mt-2">Back to List</a>
+    <a href="@Url.Action("Index")" class="btn btn-secondary mx-1 rounded-pill shadow-sm mt-2">Back to List</a>
 </div>
 
 @section Scripts {

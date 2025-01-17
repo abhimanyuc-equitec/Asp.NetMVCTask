@@ -10,28 +10,30 @@ namespace StudentManagmentSystem.Models
     {
         public int Id { get; set; }
 
-        [Range(1, int.MaxValue, ErrorMessage = "RollNo must be a positive number")]
+        [Required]
+        [Range(1, int.MaxValue,ErrorMessage ="Enter positive integer" )]
+        [RegularExpression(@"\d+"/*, ErrorMessage = "RollNo must be a whole number without decimal points"*/)]
+        [Key]
         public int RollNo { get; set; }
 
-        [Required(ErrorMessage = "Enter Your Name")]
+        [Required]
         [RegularExpression(@"^[A-Za-z\s]+$", ErrorMessage = "Name can only contain letters and spaces.")]
         public String Name { get; set; }
 
         public String DepartmentName { get; set;}
 
-        [Required(ErrorMessage = "Please select Department")]
+        [Required]
         public int DeptId {  get; set; }
 
-        [Required(ErrorMessage ="DOB should be Filled")]
+        [Required]
         public DateTime DOB {  get; set;}
         public string Age {  get; set;}
-        [Required(ErrorMessage = "pls Select Gender")]
+        [Required]
         public string Gender {  get; set;}
-        [Required(ErrorMessage = "Pls enter address")]
+        [Required]
         public String Address { get; set;}
-        [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone number must be 10 digits.")]
+        [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone No Must be 10 Digit positive")]
         public long PhoneNo {  get; set;}
 
-        
     }
 }

@@ -1,7 +1,15 @@
 ﻿@model StudentManagmentSystem.Models.StudentModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Update";
+}
+
+@{
+    if (TempData["Updated"] != null)
+    {
+        string message = TempData["Updated"].ToString();
+        <div class="alert alert-danger">@message</div>
+    }
 }
 
 <h2 class="text-center mb-1 text-bg-info  bg-opacity-10 ">Update Information Form</h2>
@@ -10,95 +18,97 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="container ">
-    <h4 class=" mb-2 mt-1 ">Student Information</h4>
-    <hr />
+    <div class="container ">
+        <h4 class=" mb-2 mt-1 ">Student Information</h4>
+        <hr />
+        <b>@Html.ValidationSummary(true, "", new { @class = "text-danger" })</b>
+        <!--Id-->
+        @Html.HiddenFor(model => model.Id)
 
-    <!--Id-->
-    @Html.HiddenFor(model => model.Id)
-
-    <!-- Roll Number -->
-    <div class="mb-3 row">
-        @Html.LabelFor(model => model.RollNo, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
-        <div class="col-sm-10">
-            @Html.EditorFor(model => model.RollNo, new { htmlAttributes = new { @class = "form-control" } })
-
-        </div>
-    </div>
-
-    <!-- Name -->
-    <div class="mb-3 row">
-        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
-        <div class="col-sm-10">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-
-        </div>
-    </div>
-
-    <!-- Department -->
-    <div class="mb-3 row">
-        @Html.LabelFor(model => model.DepartmentName, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
-        <div class="col-sm-10">
-
-            @Html.DropDownListFor(
-                model => model.DeptId,
-                new SelectList(ViewBag.dept, "DeptId", "DepartmentName"),
-                "Select Department",
-                new { @class = "form-control" }
-            )
-        </div>
-    </div>
-
-    <!--DOB-->
-    <div class="mb-3 row">
-        @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
-        <div class="col-sm-10">
-            @Html.TextBoxFor(model => model.DOB, new { @class = "form-control", type = "date" })
-
-        </div>
-    </div>
-
-
-    <!--Gender-->
-    <div class="mb-3 row form-group">
-        <label for="Gender" class="col-sm-2 col-form-label">Gender</label>
-        <div class="col-sm-10">
-            <div class="form-check">
-                <input type="radio" class="form-check-input" id="Male" name="Gender" value="Male">
-                <label class="form-check-label" for="Male">Male</label>
-            </div>
-            <div class="form-check">
-                <input type="radio" class="form-check-input" id="Female" name="Gender" value="Female">
-                <label class="form-check-label" for="Female">Female</label>
+        <!-- Roll Number -->
+        <div class="mb-3 row">
+            @Html.LabelFor(model => model.RollNo, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.RollNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RollNo, "", new { @class = "text-danger" })
             </div>
         </div>
-    </div>
 
-    <!-- Address -->
-    <div class="mb-3 row">
-        @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
-        <div class="col-sm-10">
-            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+        <!-- Name -->
+        <div class="mb-3 row">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!-- Department -->
+        <div class="mb-3 row">
+            @Html.LabelFor(model => model.DepartmentName, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-10">
+
+                @Html.DropDownListFor(
+                    model => model.DeptId,
+                    new SelectList(ViewBag.dept, "DeptId", "DepartmentName"),
+                    "Select Department",
+                    new { @class = "form-control" }
+                )
+            </div>
+            @Html.ValidationMessageFor(model => model.DepartmentName, "", new { @class = "text-danger" })
+        </div>
+
+        <!--DOB-->
+        <div class="mb-3 row">
+            @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(model => model.DOB, new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <!--Gender-->
+        <div class="mb-3 row form-group">
+            <label for="Gender" class="col-sm-2 col-form-label">Gender</label>
+            <div class="col-sm-10">
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" id="Male" name="Gender" value="Male">
+                    <label class="form-check-label" for="Male">Male</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" id="Female" name="Gender" value="Female">
+                    <label class="form-check-label" for="Female">Female</label>
+                </div>
+            </div>
+            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+        </div>
+
+        <!-- Address -->
+        <div class="mb-3 row">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!-- Phone Number -->
+        <div class="mb-3 row">
+            @Html.LabelFor(model => model.PhoneNo, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+            <div class="col-sm-10">
+                @Html.EditorFor(model => model.PhoneNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PhoneNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="mb-3 row">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" value="Save" class="btn btn-success mx-2 rounded-pill shadow-sm mt-2" />
+            </div>
         </div>
     </div>
-
-    <!-- Phone Number -->
-    <div class="mb-3 row">
-        @Html.LabelFor(model => model.PhoneNo, htmlAttributes: new { @class = "col-sm-2 col-form-label" })
-        <div class="col-sm-10">
-            @Html.EditorFor(model => model.PhoneNo, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.PhoneNo, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <!-- Submit Button -->
-    <div class="mb-3 row">
-        <div class="col-sm-offset-2 col-sm-10">
-            <input type="submit" value="Save" class="btn btn-success mx-2 rounded-pill shadow-sm mt-2" />
-        </div>
-    </div>
-</div>
 }
 
 <div>
@@ -125,7 +135,7 @@
                 PhoneNo: $("#PhoneNo").val(),
             };
 
-            console.log(obj);
+           // console.log(obj);
 
             $.ajax({
                 type: "POST",
@@ -151,7 +161,7 @@
                 contentType: "application/json",
                 url: "/Student/GetById?Id=@(ViewBag.Id)",
                 success: function (res) {
-                    console.log(res);
+                    //console.log(res);
                     $('#ID').val(res.ID);
                     $('#Name').val(res.Name);
                     $('#RollNo').val(res.RollNo);
@@ -170,7 +180,7 @@
 
                 },
                 error: function (res) {
-                    alert("Error: " + res);
+                   alert("Error: " + res);
                 }
             });
         }

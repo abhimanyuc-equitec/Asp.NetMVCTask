@@ -14,7 +14,7 @@
 <h2 class="text-center text-danger mb-4">Deleted Data</h2>
 
 <div class="d-flex justify-content-end mb-4">
-    <a href="@Url.Action("Index")" class="btn btn-warning mx-1 rounded-pill shadow-sm"> Home</a>
+    <a href="@Url.Action("Index")" class="btn btn-warning mx-1 rounded-pill shadow-sm">Back</a>
 </div>
 
 <div class="table-responsive">
@@ -62,25 +62,14 @@
                         currentCount++;
                     }
                 </tr>
-               
+
             }
         </tbody>
     </table>
 </div>
-
-<div class="d-flex justify-content-lg-end mt-4">
-    @if (ViewBag.CurrentPage > 1)
-    {
-        <a href="@Url.Action("DeletedData", new { page = ViewBag.CurrentPage - 1 })" class="btn btn-secondary mx-2">Previous</a>
-    }
-
-    @for (int i = 1; i <= ViewBag.TotalPages; i++)
-    {
-        <a href="@Url.Action("DeletedData", new { page = i })" class="btn btn-outline-primary mx-1">@i</a>
-    }
-
-    @if (ViewBag.CurrentPage < ViewBag.TotalPages)
-    {
-        <a href="@Url.Action("DeletedData", new { page = ViewBag.CurrentPage + 1 })" class="btn btn-secondary mx-2">Next</a>
-    }
-</div>
+@{
+    Html.RenderPartial("_PaginationDeletedData");
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

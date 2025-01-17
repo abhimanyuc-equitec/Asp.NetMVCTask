@@ -1,0 +1,16 @@
+﻿<div class="d-flex justify-content-lg-end mt-4">
+    @if (ViewBag.CurrentPage > 1)
+    {
+        <a href="@Url.Action("DeletedData", new { page = ViewBag.CurrentPage - 1 })" class="btn btn-secondary mx-2">Previous</a>
+    }
+
+    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+    {
+        <a href="@Url.Action("DeletedData", new { page = i })" class="btn btn-outline-primary mx-1">@i</a>
+    }
+
+    @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+    {
+        <a href="@Url.Action("DeletedData", new { page = ViewBag.CurrentPage + 1 })" class="btn btn-secondary mx-2">Next</a>
+    }
+</div>
